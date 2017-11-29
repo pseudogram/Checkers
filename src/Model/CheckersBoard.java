@@ -36,7 +36,7 @@ public class CheckersBoard {
 	 * 3	= Very Low
 	 * 4	= Print Recursions
 	 */
-	static int DEBUG = 3;
+	static int DEBUG = 0;
 
 	/**
 	 * Holds the {@link Piece} 's in the boards current state
@@ -548,7 +548,6 @@ public class CheckersBoard {
 	public ArrayList<Turn> successor() {
 
 		// If there is another possible move for the last piece that moved. Move it.
-		System.out.println(extraJump);
 		if (extraJump.isPresent()) {
 			if (DEBUG > 1)
 				System.out.printf("CheckersBoard.successor: Player %s last moved a piece that can make a " +
@@ -1026,9 +1025,10 @@ public class CheckersBoard {
 //        CheckersBoard game = new CheckersBoard(playerOneStart,new Human(playerOneStart),new Robot(!playerOneStart,null,3));
 
 		CheckersBoard game = new CheckersBoard(playerOneStart);
-		Player one = new Human(playerOneStart);
+//		Player one = new Human(playerOneStart);
 //        Player two = new Human(!playerOneStart);
-		Player two = new Robot(!playerOneStart, game, 6);
+		Player one = new Robot(playerOneStart, game, 2);
+		Player two = new Robot(!playerOneStart, game, 5);
 		game.addPlayers(one, two);
 
 		System.out.println(game.toString());

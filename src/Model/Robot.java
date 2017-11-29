@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,8 +36,12 @@ public class Robot extends Player {
 
     public int startEvaluation(){
         successorEvaluations = new ArrayList<>();
-        boolean lastPlayer = board.getHistory().peek() == null ? false : board.getHistory().peek
-            ().getPlayerOne();
+        boolean lastPlayer;
+        try{
+            lastPlayer = board.getHistory().peek().getPlayerOne();
+        } catch (EmptyStackException e) {
+            lastPlayer = false;
+        }
         int bestscore = minimax(0, lastPlayer); // depth, player
         return bestscore;
     }
